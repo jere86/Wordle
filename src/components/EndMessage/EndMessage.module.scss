@@ -1,0 +1,36 @@
+.end {
+  position: absolute;
+  top: 10rem;
+  height: 30vh;
+  width: 50vw;
+  background-color: rgba(120, 120, 120, 0.95);
+  border: 0.15rem solid rgb(200, 200, 200);
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    h1,
+    p {
+      margin-bottom: 1rem;
+    }
+    button {
+      border: none;
+      background: none;
+      svg {
+        width: 2rem;
+        height: 2rem;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
