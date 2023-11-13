@@ -3,11 +3,13 @@
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  width: 100%;
   user-select: none;
 
   h1 {
     font-size: 2rem;
     color: white;
+    padding: 0.25rem 0;
     span {
       font-size: 1.25rem;
     }

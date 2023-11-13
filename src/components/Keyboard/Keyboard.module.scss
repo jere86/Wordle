@@ -1,69 +1,39 @@
 .keyboard {
-  display: flex;
-  flex-direction: column;
-  width: 40vw;
-  min-width: 365px;
-  color: white;
+  display: grid;
+  grid-template-columns: repeat(22, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.05rem;
+  width: 100%;
+  height: 30%;
+  color: rgb(0, 0, 0);
 
-  div {
-    display: flex;
-    flex-direction: row;
-    font-weight: 500;
-    max-width: 100%;
+  .key {
+    display: grid;
+    grid-column: span 2;
+    justify-content: center;
+    align-items: center;
+    // min-height: 3rem;
+    margin: 0.15rem;
+    background: rgb(180, 180, 180);
+    border-radius: 0.25rem;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
-  .firstRow,
-  .middleRow {
-    .key {
-      display: flex;
-      flex: 1;
-      justify-content: center;
-      align-items: center;
-      height: 3rem;
-      margin: 0.25rem;
-      background: rgb(180, 180, 180);
-      border-radius: 0.25rem;
-      text-shadow: 0.1rem 0.15rem 0.25rem rgb(0, 0, 0);
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .green {
-      background: rgb(0, 201, 0);
-    }
-    .yellow {
-      background: yellow;
-    }
-    .grey {
-      background: rgb(120, 120, 120);
-    }
+  & > div:nth-child(23),
+  & > div:nth-child(32) {
+    grid-column: span 3;
   }
-  .lastRow {
-    .key {
-      display: flex;
-      flex: 1;
-      justify-content: center;
-      align-items: center;
-      height: 3rem;
-      margin: 0.25rem;
-      // padding: 0 0.5rem;
-      background: rgb(180, 180, 180);
-      border-radius: 0.25rem;
-      text-shadow: 0.1rem 0.15rem 0.25rem rgb(0, 0, 0);
 
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .green {
-      background: rgb(0, 201, 0);
-    }
-    .yellow {
-      background: yellow;
-    }
-    .grey {
-      background: rgb(120, 120, 120);
-    }
+  .green {
+    background: rgb(0, 201, 0);
+  }
+  .yellow {
+    background: yellow;
+  }
+  .grey {
+    background: rgb(120, 120, 120);
   }
 }

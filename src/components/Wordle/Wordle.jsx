@@ -32,7 +32,6 @@ export default function Wordle({ solution }) {
 
   return (
     <div className={styles.wordle}>
-      <hr />
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
       <Keyboard usedKeys={usedKeys} handleKeyup={handleKeyup} />
       {show && (
