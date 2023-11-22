@@ -3,7 +3,7 @@ import Wordle from "./components/Wordle/Wordle";
 import styles from "./App.module.scss";
 import { solutions } from "./data/db";
 
-const App = () => {
+const App = ({ usableHeight }) => {
   const [solution, setSolution] = useState(null);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const App = () => {
   }, [setSolution]);
 
   return (
-    <div className={styles.game}>
+    <div className={styles.game} style={{ height: usableHeight }}>
       <h1>
         WORDLE <span>HR</span>
       </h1>
