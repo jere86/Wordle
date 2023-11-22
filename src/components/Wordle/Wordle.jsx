@@ -1,42 +1,60 @@
 import React, { useEffect, useState } from "react";
 import useWordle from "../../hooks/useWordle";
-import Grid from "../Grid/Grid";
 import styles from "./Wordle.module.scss";
+
+import Grid from "../Grid/Grid";
 import Keyboard from "../Keyboard/Keyboard";
-import EndMessage from "../EndMessage/EndMessage";
+import EndMessage from "../Messages/EndMessage";
+import LongEnoughMessage from "../Messages/LongEnoughMessage";
 
 export default function Wordle({ solution }) {
-  const { currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys } =
-    useWordle(solution);
-  const [show, setShow] = useState(false);
+  const {
+    currentGuess,
+    handleKeyup,
+    guesses,
+    isCorrect,
+    turn,
+    usedKeys,
+    longEnough,
+    shake,
+  } = useWordle(solution);
+  const [showEndMassage, setShowEndMassage] = useState(false);
+  const [showLongEnoughMessage, setShowLongEnoughMessage] = useState(false);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
 
-    if (isCorrect) {
+    if (isCorrect || turn > 5) {
       setTimeout(() => {
-        setShow(true);
-      }, 2000);
+        setShowEndMassage(true);
+      }, 2200);
       window.removeEventListener("keyup", handleKeyup);
     }
-    if (turn > 5) {
-      setTimeout(() => {
-        setShow(true);
-      }, 2000);
 
-      window.removeEventListener("keyup", handleKeyup);
+    if (longEnough === false) {
+      setShowLongEnoughMessage(true);
+      setTimeout(() => {
+        setShowLongEnoughMessage(false);
+      }, 1000);
     }
 
     return () => window.removeEventListener("keyup", handleKeyup);
-  }, [handleKeyup, isCorrect, turn]);
+  }, [handleKeyup, isCorrect, turn, longEnough]);
 
   return (
     <div className={styles.wordle}>
-      <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
+      <Grid
+        currentGuess={currentGuess}
+        guesses={guesses}
+        turn={turn}
+        shake={shake}
+        isCorrect={isCorrect}
+      />
       <Keyboard usedKeys={usedKeys} handleKeyup={handleKeyup} />
-      {show && (
+      {showEndMassage && (
         <EndMessage isCorrect={isCorrect} turn={turn} solution={solution} />
       )}
+      {showLongEnoughMessage && <LongEnoughMessage />}
     </div>
   );
 }

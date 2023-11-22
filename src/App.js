@@ -12,8 +12,6 @@ const App = () => {
     setSolution(randomSolution.word);
   }, [setSolution]);
 
-  console.log(solution);
-
   return (
     <div className={styles.game}>
       <h1>

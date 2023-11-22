@@ -7,10 +7,12 @@ const Keyboard = ({ usedKeys, handleKeyup }) => {
     if (key === "⏎") {
       let key = "Enter";
       handleKeyup({ key });
+      return;
     }
     if (key === "⌫") {
       let key = "Backspace";
       handleKeyup({ key });
+      return;
     }
     handleKeyup({ key });
   };

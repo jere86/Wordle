@@ -2,15 +2,17 @@ import { useState } from "react";
 
 const useWordle = (solution) => {
   const [turn, setTurn] = useState(0);
-  const [currentGuess, setCurrentGuess] = useState("");
+  const [currentGuess, setCurrentGuess] = useState([]);
   const [guesses, setGuesses] = useState([...Array(6)]);
   const [history, setHistory] = useState([]);
   const [isCorrect, setIsCorrect] = useState(false);
   const [usedKeys, setUsedKey] = useState({});
+  const [longEnough, setLongEnough] = useState(true);
+  const [shake, setShake] = useState(false);
 
   const formatGuess = () => {
     let solutionArray = [...solution];
-    let formattedGuess = [...currentGuess].map((l) => {
+    let formattedGuess = currentGuess.map((l) => {
       return { key: l, color: "grey" };
     });
 
@@ -20,6 +22,7 @@ const useWordle = (solution) => {
         solutionArray[i] = null;
       }
     });
+
     formattedGuess.forEach((l, i) => {
       if (solutionArray.includes(l.key) && l.color !== "green") {
         formattedGuess[i].color = "yellow";
@@ -31,20 +34,24 @@ const useWordle = (solution) => {
   };
 
   const addNewGuess = (formattedGuess) => {
-    if (currentGuess === solution) {
+    if (JSON.stringify(currentGuess) === JSON.stringify(solution)) {
       setIsCorrect(true);
     }
+
     setGuesses((prevGuesses) => {
       let newGuesses = [...prevGuesses];
       newGuesses[turn] = formattedGuess;
       return newGuesses;
     });
+
     setHistory((prevHistory) => {
-      return [...prevHistory, currentGuess];
+      return [...prevHistory, currentGuess.join("")];
     });
+
     setTurn((prevTurn) => {
       return prevTurn + 1;
     });
+
     setUsedKey((prevUsedKeys) => {
       let newKeys = { ...prevUsedKeys };
 
@@ -55,10 +62,12 @@ const useWordle = (solution) => {
           newKeys[l.key] = "green";
           return;
         }
+
         if (l.color === "yellow" && currentColor !== "green") {
           newKeys[l.key] = "yellow";
           return;
         }
+
         if (
           l.color === "grey" &&
           currentColor !== "green" &&
@@ -71,42 +80,89 @@ const useWordle = (solution) => {
 
       return newKeys;
     });
-    setCurrentGuess("");
+    setCurrentGuess([]);
   };
 
   const handleKeyup = ({ key }) => {
+    const allowedRegex = /^[A-Za-zČčĆćĐđŠšŽžDŽdžNJnjLJlj]+$/;
+
+    if (!allowedRegex.test(key)) {
+      return;
+    }
+
     if (key === "Enter") {
       if (turn > 5) {
         console.log("used all guesses");
         return;
       }
-      if (history.includes(currentGuess)) {
+
+      if (history.includes(currentGuess.join(""))) {
         console.log("already use that word");
         return;
       }
+
       if (currentGuess.length !== 5) {
-        console.log("word must be 5 chars long");
+        setShake((prev) => !prev);
+        setLongEnough((prev) => !prev);
+        setTimeout(() => {
+          setShake((prev) => !prev);
+          setLongEnough((prev) => !prev);
+        }, 1000);
         return;
       }
+
       const formatted = formatGuess();
       addNewGuess(formatted);
     }
+
     if (key === "Backspace") {
       setCurrentGuess((prev) => {
         return prev.slice(0, -1);
       });
       return;
     }
-    if (/^[A-Za-zČčĆćĐđŠšŽžDŽdžNJnjLJlj]+$/.test(key)) {
-      if (currentGuess.length < 5) {
-        setCurrentGuess((prev) => {
-          return prev + key;
-        });
-      }
+
+    if (
+      (key === "ž" || key === "Ž") &&
+      (currentGuess[currentGuess.length - 1] === "d" ||
+        currentGuess[currentGuess.length - 1] === "D")
+    ) {
+      setCurrentGuess((prev) => [...prev.slice(0, -1), "dž"]);
+      return;
+    }
+    if (
+      (key === "j" || key === "J") &&
+      (currentGuess[currentGuess.length - 1] === "n" ||
+        currentGuess[currentGuess.length - 1] === "N")
+    ) {
+      setCurrentGuess((prev) => [...prev.slice(0, -1), "nj"]);
+      return;
+    }
+    if (
+      (key === "j" || key === "J") &&
+      (currentGuess[currentGuess.length - 1] === "l" ||
+        currentGuess[currentGuess.length - 1] === "L")
+    ) {
+      setCurrentGuess((prev) => [...prev.slice(0, -1), "lj"]);
+      return;
+    }
+    if (currentGuess.length < 5) {
+      setCurrentGuess((prev) => {
+        return [...prev, key];
+      });
     }
   };
 
-  return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup };
+  return {
+    turn,
+    currentGuess,
+    guesses,
+    isCorrect,
+    usedKeys,
+    longEnough,
+    handleKeyup,
+    shake,
+  };
 };
 
 export default useWordle;
