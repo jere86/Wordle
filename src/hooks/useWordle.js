@@ -8,6 +8,7 @@ const useWordle = (solution) => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [usedKeys, setUsedKey] = useState({});
   const [longEnough, setLongEnough] = useState(true);
+  const [sameWord, setSameWord] = useState(false);
   const [shake, setShake] = useState(false);
 
   const formatGuess = () => {
@@ -97,7 +98,12 @@ const useWordle = (solution) => {
       }
 
       if (history.includes(currentGuess.join(""))) {
-        console.log("already use that word");
+        setShake((prev) => !prev);
+        setSameWord((prev) => !prev);
+        setTimeout(() => {
+          setShake((prev) => !prev);
+          setSameWord((prev) => !prev);
+        }, 1000);
         return;
       }
 
@@ -159,9 +165,10 @@ const useWordle = (solution) => {
     guesses,
     isCorrect,
     usedKeys,
-    longEnough,
     handleKeyup,
     shake,
+    longEnough,
+    sameWord,
   };
 };
 

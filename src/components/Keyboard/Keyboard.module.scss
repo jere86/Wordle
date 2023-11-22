@@ -27,6 +27,9 @@
   & > div:nth-child(32) {
     grid-column: span 3;
   }
+  & > div:nth-child(32) {
+    font-size: 1rem;
+  }
 
   .green {
     background: rgb(83 141 78);

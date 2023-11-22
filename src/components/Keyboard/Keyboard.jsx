@@ -4,11 +4,6 @@ import { allLetters } from "../../data/db";
 
 const Keyboard = ({ usedKeys, handleKeyup }) => {
   const handleKeyPress = (key) => {
-    if (key === "⏎") {
-      let key = "Enter";
-      handleKeyup({ key });
-      return;
-    }
     if (key === "⌫") {
       let key = "Backspace";
       handleKeyup({ key });

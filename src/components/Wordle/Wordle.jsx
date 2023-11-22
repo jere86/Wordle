@@ -6,6 +6,7 @@ import Grid from "../Grid/Grid";
 import Keyboard from "../Keyboard/Keyboard";
 import EndMessage from "../Messages/EndMessage";
 import LongEnoughMessage from "../Messages/LongEnoughMessage";
+import SameWordMessage from "../Messages/SameWordMessage";
 
 export default function Wordle({ solution }) {
   const {
@@ -16,10 +17,12 @@ export default function Wordle({ solution }) {
     turn,
     usedKeys,
     longEnough,
+    sameWord,
     shake,
   } = useWordle(solution);
   const [showEndMassage, setShowEndMassage] = useState(false);
   const [showLongEnoughMessage, setShowLongEnoughMessage] = useState(false);
+  const [showSameWordMessage, setShowSameWordMessage] = useState(false);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
@@ -38,8 +41,15 @@ export default function Wordle({ solution }) {
       }, 1000);
     }
 
+    if (sameWord === true) {
+      setShowSameWordMessage(true);
+      setTimeout(() => {
+        setShowSameWordMessage(false);
+      }, 1000);
+    }
+
     return () => window.removeEventListener("keyup", handleKeyup);
-  }, [handleKeyup, isCorrect, turn, longEnough]);
+  }, [handleKeyup, isCorrect, turn, longEnough, sameWord]);
 
   return (
     <div className={styles.wordle}>
@@ -55,6 +65,7 @@ export default function Wordle({ solution }) {
         <EndMessage isCorrect={isCorrect} turn={turn} solution={solution} />
       )}
       {showLongEnoughMessage && <LongEnoughMessage />}
+      {showSameWordMessage && <SameWordMessage />}
     </div>
   );
 }

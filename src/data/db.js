@@ -125,7 +125,7 @@ export const allLetters = [
   { key: "l" },
   { key: "č" },
   { key: "ć" },
-  { key: "⏎" },
+  { key: "Enter" },
   { key: "c" },
   { key: "v" },
   { key: "b" },
