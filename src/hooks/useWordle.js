@@ -8,7 +8,7 @@ const useWordle = (solution) => {
   const [history, setHistory] = useState([]);
   const [isCorrect, setIsCorrect] = useState(false);
   const [usedKeys, setUsedKey] = useState({});
-  const [longEnough, setLongEnough] = useState(true);
+  const [longEnough, setLongEnough] = useState(false);
   const [sameWord, setSameWord] = useState(false);
   const [notAWord, setNotAWord] = useState(false);
   const [shake, setShake] = useState(false);
@@ -110,6 +110,16 @@ const useWordle = (solution) => {
         return;
       }
 
+      if (currentGuess.length !== 5) {
+        setShake((prev) => !prev);
+        setLongEnough((prev) => !prev);
+        setTimeout(() => {
+          setShake((prev) => !prev);
+          setLongEnough((prev) => !prev);
+        }, 1000);
+        return;
+      }
+
       if (
         !solutions.some(
           (solution) => solution.word.join("") === currentGuess.join("")
@@ -120,16 +130,6 @@ const useWordle = (solution) => {
         setTimeout(() => {
           setShake((prev) => !prev);
           setNotAWord((prev) => !prev);
-        }, 1000);
-        return;
-      }
-
-      if (currentGuess.length !== 5) {
-        setShake((prev) => !prev);
-        setLongEnough((prev) => !prev);
-        setTimeout(() => {
-          setShake((prev) => !prev);
-          setLongEnough((prev) => !prev);
         }, 1000);
         return;
       }

@@ -3,20 +3,21 @@ import styles from "./Message.module.scss";
 
 export default function EndMessage({ isCorrect, turn, solution }) {
   return (
-    <div className={styles.message}>
+    <div className={styles.message} style={{ width: "80%" }}>
       <div>
         {isCorrect ? (
           <>
             <h2>ČESTITAMO!</h2>
             <p>
-              Pogodili ste riječ u <b>{turn}/6</b> pokušaja.
+              Pogodili ste riječ <b>#{solution.id}</b>
+              <br />u <b>{turn}/6</b> pokušaja.
             </p>
           </>
         ) : (
           <>
             <h2>NISTE POGODILI!</h2>
             <p>
-              Točna riječ je <b>"{solution.join("").toUpperCase()}"</b>.
+              Točna riječ je <b>"{solution.word.join("").toUpperCase()}"</b>.
             </p>
           </>
         )}

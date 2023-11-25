@@ -21,10 +21,8 @@ export default function Wordle({ solution }) {
     sameWord,
     notAWord,
     shake,
-  } = useWordle(solution);
+  } = useWordle(solution.word);
   const [showEndMassage, setShowEndMassage] = useState(false);
-  const [showLongEnoughMessage, setShowLongEnoughMessage] = useState(false);
-  const [showSameWordMessage, setShowSameWordMessage] = useState(false);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
@@ -36,22 +34,8 @@ export default function Wordle({ solution }) {
       window.removeEventListener("keyup", handleKeyup);
     }
 
-    if (longEnough === false) {
-      setShowLongEnoughMessage(true);
-      setTimeout(() => {
-        setShowLongEnoughMessage(false);
-      }, 1000);
-    }
-
-    if (sameWord === true) {
-      setShowSameWordMessage(true);
-      setTimeout(() => {
-        setShowSameWordMessage(false);
-      }, 1000);
-    }
-
     return () => window.removeEventListener("keyup", handleKeyup);
-  }, [handleKeyup, isCorrect, turn, longEnough, sameWord]);
+  }, [handleKeyup, isCorrect, turn]);
 
   return (
     <div className={styles.wordle}>
@@ -66,8 +50,8 @@ export default function Wordle({ solution }) {
       {showEndMassage && (
         <EndMessage isCorrect={isCorrect} turn={turn} solution={solution} />
       )}
-      {showLongEnoughMessage && <LongEnoughMessage />}
-      {showSameWordMessage && <SameWordMessage />}
+      {longEnough && <LongEnoughMessage />}
+      {sameWord && <SameWordMessage />}
       {notAWord && <NotAWordMessage />}
     </div>
   );

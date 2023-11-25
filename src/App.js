@@ -9,10 +9,8 @@ const App = ({ usableHeight }) => {
   useEffect(() => {
     const randomSolution =
       solutions[Math.floor(Math.random() * solutions.length)];
-    setSolution(randomSolution.word);
+    setSolution(randomSolution);
   }, [setSolution]);
-
-  console.log(solutions);
 
   return (
     <div className={styles.game} style={{ height: usableHeight }}>
