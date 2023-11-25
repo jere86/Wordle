@@ -14,9 +14,9 @@ export default function EndMessage({ isCorrect, turn, solution }) {
           </>
         ) : (
           <>
-            <h2>NISTE POGODILI RIJEČ!</h2>
+            <h2>NISTE POGODILI!</h2>
             <p>
-              Točna riječ je: <b>"{solution.join("").toUpperCase()}"</b>.
+              Točna riječ je <b>"{solution.join("").toUpperCase()}"</b>.
             </p>
           </>
         )}

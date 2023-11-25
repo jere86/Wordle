@@ -12,6 +12,8 @@ const App = ({ usableHeight }) => {
     setSolution(randomSolution.word);
   }, [setSolution]);
 
+  console.log(solutions);
+
   return (
     <div className={styles.game} style={{ height: usableHeight }}>
       <h1>

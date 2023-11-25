@@ -7,6 +7,7 @@ import Keyboard from "../Keyboard/Keyboard";
 import EndMessage from "../Messages/EndMessage";
 import LongEnoughMessage from "../Messages/LongEnoughMessage";
 import SameWordMessage from "../Messages/SameWordMessage";
+import NotAWordMessage from "../Messages/NotAWordMessage";
 
 export default function Wordle({ solution }) {
   const {
@@ -18,6 +19,7 @@ export default function Wordle({ solution }) {
     usedKeys,
     longEnough,
     sameWord,
+    notAWord,
     shake,
   } = useWordle(solution);
   const [showEndMassage, setShowEndMassage] = useState(false);
@@ -66,6 +68,7 @@ export default function Wordle({ solution }) {
       )}
       {showLongEnoughMessage && <LongEnoughMessage />}
       {showSameWordMessage && <SameWordMessage />}
+      {notAWord && <NotAWordMessage />}
     </div>
   );
 }

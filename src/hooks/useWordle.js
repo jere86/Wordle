@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { solutions } from "../data/db";
 
 const useWordle = (solution) => {
   const [turn, setTurn] = useState(0);
@@ -9,6 +10,7 @@ const useWordle = (solution) => {
   const [usedKeys, setUsedKey] = useState({});
   const [longEnough, setLongEnough] = useState(true);
   const [sameWord, setSameWord] = useState(false);
+  const [notAWord, setNotAWord] = useState(false);
   const [shake, setShake] = useState(false);
 
   const formatGuess = () => {
@@ -85,9 +87,10 @@ const useWordle = (solution) => {
   };
 
   const handleKeyup = ({ key }) => {
-    const allowedRegex = /^[A-Za-zČčĆćĐđŠšŽžDŽdžNJnjLJlj]+$/;
+    const allowedRegex = /^[A-Za-zČčĆćĐđŠšŽžDŽdžNJnjLJlj]/;
 
     if (!allowedRegex.test(key)) {
+      console.log("JE");
       return;
     }
 
@@ -103,6 +106,20 @@ const useWordle = (solution) => {
         setTimeout(() => {
           setShake((prev) => !prev);
           setSameWord((prev) => !prev);
+        }, 1000);
+        return;
+      }
+
+      if (
+        !solutions.some(
+          (solution) => solution.word.join("") === currentGuess.join("")
+        )
+      ) {
+        setShake((prev) => !prev);
+        setNotAWord((prev) => !prev);
+        setTimeout(() => {
+          setShake((prev) => !prev);
+          setNotAWord((prev) => !prev);
         }, 1000);
         return;
       }
@@ -169,6 +186,7 @@ const useWordle = (solution) => {
     shake,
     longEnough,
     sameWord,
+    notAWord,
   };
 };
 
