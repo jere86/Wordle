@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Message.module.scss";
+import { WhatsappShareButton, WhatsappIcon } from "react-share";
 
 export default function EndMessage({ isCorrect, turn, solution }) {
   return (
@@ -27,6 +28,14 @@ export default function EndMessage({ isCorrect, turn, solution }) {
           </svg>
           PONOVI
         </button>
+        {isCorrect && (
+          <WhatsappShareButton
+            url={"https://wordle-jere86.vercel.app/"}
+            children={"neka poruka"}
+          >
+            <WhatsappIcon size={48} round />
+          </WhatsappShareButton>
+        )}
       </div>
     </div>
   );
