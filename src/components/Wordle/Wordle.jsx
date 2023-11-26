@@ -48,7 +48,12 @@ export default function Wordle({ solution }) {
       />
       <Keyboard usedKeys={usedKeys} handleKeyup={handleKeyup} />
       {showEndMassage && (
-        <EndMessage isCorrect={isCorrect} turn={turn} solution={solution} />
+        <EndMessage
+          isCorrect={isCorrect}
+          turn={turn}
+          solution={solution}
+          guesses={guesses}
+        />
       )}
       {longEnough && <LongEnoughMessage />}
       {sameWord && <SameWordMessage />}

@@ -13,6 +13,8 @@ const useWordle = (solution) => {
   const [notAWord, setNotAWord] = useState(false);
   const [shake, setShake] = useState(false);
 
+  console.log(guesses);
+
   const formatGuess = () => {
     let solutionArray = [...solution];
     let formattedGuess = currentGuess.map((l) => {
