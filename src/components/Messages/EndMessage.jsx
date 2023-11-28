@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./Message.module.scss";
 
 export default function EndMessage({ isCorrect, turn, solution, guesses }) {
-  const text = `bit.ly/worlde_hr #${solution.id} ${
+  const text = `bit.ly/worlde_hr 🇭🇷\n#${solution.id} ${
     isCorrect ? `${turn}/6` : "X/6"
-  }\n\n${guesses
+  }\n${guesses
     .filter((word) => word !== undefined)
     .map((word) =>
       word
