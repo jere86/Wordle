@@ -13,7 +13,7 @@ const useWordle = (solution) => {
   const [notAWord, setNotAWord] = useState(false);
   const [shake, setShake] = useState(false);
 
-  console.log(guesses);
+  // console.log(guesses);
 
   const formatGuess = () => {
     let solutionArray = [...solution];
@@ -92,7 +92,7 @@ const useWordle = (solution) => {
     const allowedRegex = /^[A-Za-zČčĆćĐđŠšŽžDŽdžNJnjLJlj]/;
 
     if (!allowedRegex.test(key)) {
-      console.log("JE");
+      console.log("je");
       return;
     }
 

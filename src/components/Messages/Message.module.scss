@@ -16,11 +16,13 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+
     h2,
     p {
       color: black;
       margin: 0 2rem 1rem;
     }
+
     button {
       display: flex;
       flex-direction: column;
@@ -30,11 +32,13 @@
       border: none;
       background: none;
       margin: 0.25rem 0;
+
       svg {
         width: 2.5rem;
         height: 2.5rem;
         margin-bottom: 0.25rem;
       }
+
       &:hover {
         cursor: pointer;
       }
@@ -50,6 +54,56 @@
 
     hr {
       border: 1px solid;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0.5rem;
+
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 1rem 0 0.5rem;
+
+      input {
+        all: unset;
+        box-sizing: border-box;
+        height: 3rem;
+        width: 8rem;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        border: 2px solid rgb(150, 150, 150);
+        border-right: none;
+        border-radius: 0.5rem 0 0 0.5rem;
+        background-color: white;
+
+        &::-webkit-inner-spin-button {
+          display: none;
+        }
+      }
+
+      button {
+        all: unset;
+        height: 3rem;
+        width: 3rem;
+        border-radius: 0 0.5rem 0.5rem 0;
+        background-color: rgb(150, 150, 150);
+
+        svg {
+          height: 2rem;
+          width: 2rem;
+          margin: 0.5rem;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgb(83 141 78);
+        }
+      }
     }
   }
 }

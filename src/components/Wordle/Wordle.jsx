@@ -9,7 +9,7 @@ import LongEnoughMessage from "../Messages/LongEnoughMessage";
 import SameWordMessage from "../Messages/SameWordMessage";
 import NotAWordMessage from "../Messages/NotAWordMessage";
 
-export default function Wordle({ solution }) {
+export default function Wordle({ solution, showForm }) {
   const {
     currentGuess,
     handleKeyup,
@@ -36,6 +36,10 @@ export default function Wordle({ solution }) {
 
     return () => window.removeEventListener("keyup", handleKeyup);
   }, [handleKeyup, isCorrect, turn]);
+
+  useEffect(() => {
+    showForm && window.removeEventListener("keyup", handleKeyup);
+  }, [showForm, handleKeyup]);
 
   return (
     <div className={styles.wordle}>
