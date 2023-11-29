@@ -32,7 +32,6 @@ export default function Wordle({ solution, showForm, setDisableButton }) {
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
-
     if (turn > 0) {
       setDisableButton(true);
     }
@@ -63,18 +62,18 @@ export default function Wordle({ solution, showForm, setDisableButton }) {
       <Keyboard usedKeys={usedKeys} handleKeyup={handleKeyup} />
       {showEndMassage && (
         <EndMessage
-          isCorrect={isCorrect}
+          solution={solution}
           turn={turn}
           setTurn={setTurn}
-          solution={solution}
           guesses={guesses}
           setGuesses={setGuesses}
-          setShowEndMassage={setShowEndMassage}
+          isCorrect={isCorrect}
           setIsCorrect={setIsCorrect}
-          setDisableButton={setDisableButton}
           setHistory={setHistory}
           setUsedKey={setUsedKey}
           setCurrentGuess={setCurrentGuess}
+          setShowEndMassage={setShowEndMassage}
+          setDisableButton={setDisableButton}
         />
       )}
       {longEnough && <LongEnoughMessage />}

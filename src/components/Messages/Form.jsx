@@ -27,6 +27,7 @@ export default function Form({ setShowForm }) {
         <h3>UNESITE # TRAŽENE RIJEČI</h3>
         <div>
           <input
+            id="solution number"
             type="number"
             value={enteredNumber}
             onChange={handleInputChange}
