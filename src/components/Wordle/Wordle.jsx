@@ -11,16 +11,22 @@ import NotAWordMessage from "../Messages/NotAWordMessage";
 
 export default function Wordle({ solution, showForm, setDisableButton }) {
   const {
-    currentGuess,
     handleKeyup,
+    currentGuess,
+    setCurrentGuess,
     guesses,
+    setGuesses,
     isCorrect,
+    setIsCorrect,
     turn,
+    setTurn,
     usedKeys,
     longEnough,
     sameWord,
     notAWord,
     shake,
+    setHistory,
+    setUsedKey,
   } = useWordle(solution.word);
   const [showEndMassage, setShowEndMassage] = useState(false);
 
@@ -59,8 +65,16 @@ export default function Wordle({ solution, showForm, setDisableButton }) {
         <EndMessage
           isCorrect={isCorrect}
           turn={turn}
+          setTurn={setTurn}
           solution={solution}
           guesses={guesses}
+          setGuesses={setGuesses}
+          setShowEndMassage={setShowEndMassage}
+          setIsCorrect={setIsCorrect}
+          setDisableButton={setDisableButton}
+          setHistory={setHistory}
+          setUsedKey={setUsedKey}
+          setCurrentGuess={setCurrentGuess}
         />
       )}
       {longEnough && <LongEnoughMessage />}

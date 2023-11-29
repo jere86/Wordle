@@ -122,7 +122,8 @@ const useWordle = (solution) => {
 
       if (
         !solutions.some(
-          (solution) => solution.word.join("") === currentGuess.join("")
+          (solution) =>
+            solution.word.join("") === currentGuess.join("").toLocaleLowerCase()
         )
       ) {
         setShake((prev) => !prev);
@@ -178,15 +179,21 @@ const useWordle = (solution) => {
 
   return {
     turn,
+    setTurn,
     currentGuess,
     guesses,
+    setCurrentGuess,
+    setGuesses,
     isCorrect,
+    setIsCorrect,
     usedKeys,
     handleKeyup,
     shake,
     longEnough,
     sameWord,
     notAWord,
+    setHistory,
+    setUsedKey,
   };
 };
 
