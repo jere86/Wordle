@@ -18,7 +18,7 @@ export default function EndMessage({
 }) {
   const navigate = useNavigate();
 
-  const text = `wordle-jere86.vercel.app/${solution.id}\n  🇭🇷        ${
+  const text = `wordle-jere86.vercel.app/${solution.id}\n🇭🇷 ${solution.id} ${
     isCorrect ? `${turn}/6` : "X/6"
   }\n${guesses
     .filter((word) => word !== undefined)
