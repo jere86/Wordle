@@ -30,8 +30,6 @@ export default function Form({ setShowForm }) {
             type="number"
             value={enteredNumber}
             onChange={handleInputChange}
-            // min={1}
-            // max={7653}
             autoFocus
           />
           <button type="submit">
