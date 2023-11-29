@@ -9,8 +9,6 @@ export default function Grid({
   shake,
   isCorrect,
 }) {
-  // console.log(isCorrect);
-
   return (
     <div className={styles.grid}>
       {guesses.map((g, i) => {

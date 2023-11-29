@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Message.module.scss";
 
 export default function EndMessage({ isCorrect, turn, solution, guesses }) {
-  const text = `bit.ly/worlde_hr 🇭🇷\n#${solution.id} ${
+  const text = `bit.ly/worlde_hr/${solution.id}\n#${solution.id} 🇭🇷 ${
     isCorrect ? `${turn}/6` : "X/6"
   }\n${guesses
     .filter((word) => word !== undefined)

@@ -9,7 +9,7 @@ import LongEnoughMessage from "../Messages/LongEnoughMessage";
 import SameWordMessage from "../Messages/SameWordMessage";
 import NotAWordMessage from "../Messages/NotAWordMessage";
 
-export default function Wordle({ solution, showForm }) {
+export default function Wordle({ solution, showForm, setDisableButton }) {
   const {
     currentGuess,
     handleKeyup,
@@ -27,6 +27,10 @@ export default function Wordle({ solution, showForm }) {
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
 
+    if (turn > 0) {
+      setDisableButton(true);
+    }
+
     if (isCorrect || turn > 5) {
       setTimeout(() => {
         setShowEndMassage(true);
@@ -35,7 +39,7 @@ export default function Wordle({ solution, showForm }) {
     }
 
     return () => window.removeEventListener("keyup", handleKeyup);
-  }, [handleKeyup, isCorrect, turn]);
+  }, [setDisableButton, handleKeyup, isCorrect, turn]);
 
   useEffect(() => {
     showForm && window.removeEventListener("keyup", handleKeyup);

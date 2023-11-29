@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Message.module.scss";
 import { solutions } from "../../data/db";
+import { useNavigate } from "react-router-dom";
 
-export default function Form({ setShowForm, setSearchId }) {
+export default function Form({ setShowForm }) {
+  const navigate = useNavigate();
+
   const [enteredNumber, setEnteredNumber] = useState("");
 
   const handleInputChange = (e) => {
@@ -12,7 +15,7 @@ export default function Form({ setShowForm, setSearchId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (1 <= enteredNumber && enteredNumber <= solutions.length) {
-      setSearchId(enteredNumber);
+      navigate(`/${enteredNumber}`);
       setEnteredNumber("");
       setShowForm((prev) => !prev);
     }
